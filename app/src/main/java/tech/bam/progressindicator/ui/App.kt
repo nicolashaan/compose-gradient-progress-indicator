@@ -1,5 +1,6 @@
 package tech.bam.progressindicator.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,10 +18,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import tech.bam.progressindicator.ui.theme.CustomProgressIndicatorTheme
+import tech.bam.progressindicator.ui.theme.LightGrey
 
 enum class ProgressBarColor(private val color: Color) {
     Red(Color(255, 31, 43)),
@@ -31,6 +34,8 @@ enum class ProgressBarColor(private val color: Color) {
         return color
     }
 }
+
+val trackColor = White
 
 @Composable
 fun App() {
@@ -43,9 +48,11 @@ fun App() {
             val indicatorSize = 144.dp
             val trackWidth: Dp = (indicatorSize * .1f)
             val commonModifier = Modifier.size(indicatorSize)
+
             Column(
                 verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.background(LightGrey)
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -55,13 +62,15 @@ fun App() {
                         progress = progress,
                         modifier = commonModifier,
                         strokeWidth = trackWidth,
-                        color = ProgressBarColor.Blue()
+                        color = ProgressBarColor.Blue(),
+                        trackColor = trackColor,
                     )
                     GradientProgressIndicator(
                         progress = progress,
                         modifier = commonModifier,
                         strokeWidth = trackWidth,
-                        color = ProgressBarColor.Red()
+                        color = ProgressBarColor.Red(),
+                        trackColor = trackColor,
                     )
                 }
                 Row(
@@ -72,13 +81,15 @@ fun App() {
                         progress = progress,
                         modifier = commonModifier,
                         strokeWidth = trackWidth,
-                        color = ProgressBarColor.Green()
+                        color = ProgressBarColor.Green(),
+                        trackColor = trackColor,
                     )
                     GradientProgressIndicator(
                         progress = progress,
                         modifier = commonModifier,
                         strokeWidth = trackWidth,
-                        color = ProgressBarColor.Purple()
+                        color = ProgressBarColor.Purple(),
+                        trackColor = trackColor,
                     )
                 }
                 Slider(

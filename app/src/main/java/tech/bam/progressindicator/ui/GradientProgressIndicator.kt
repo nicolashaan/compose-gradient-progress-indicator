@@ -19,6 +19,7 @@ fun GradientProgressIndicator(
     progress: Float,
     modifier: Modifier = Modifier,
     color: Color,
+    trackColor: Color,
     strokeWidth: Dp
 ) {
     val stroke = with(LocalDensity.current) {
@@ -31,6 +32,7 @@ fun GradientProgressIndicator(
         // Start at 12 o'clock
         val startAngle = 270f
         val sweep = progress * 360f
+        drawDeterminateCircularIndicator(startAngle, 360f, trackColor, stroke)
         drawDeterminateCircularIndicator(startAngle, sweep, color, stroke)
     }
 }
