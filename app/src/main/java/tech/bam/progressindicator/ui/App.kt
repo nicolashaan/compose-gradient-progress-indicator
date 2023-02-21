@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
@@ -52,13 +51,13 @@ fun App() {
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center,
                 ) {
-                    CircularProgressIndicator(
+                    GradientProgressIndicator(
                         progress = progress,
                         modifier = commonModifier,
                         strokeWidth = trackWidth,
                         color = ProgressBarColor.Blue()
                     )
-                    CircularProgressIndicator(
+                    GradientProgressIndicator(
                         progress = progress,
                         modifier = commonModifier,
                         strokeWidth = trackWidth,
@@ -69,13 +68,13 @@ fun App() {
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center,
                 ) {
-                    CircularProgressIndicator(
+                    GradientProgressIndicator(
                         progress = progress,
                         modifier = commonModifier,
                         strokeWidth = trackWidth,
                         color = ProgressBarColor.Green()
                     )
-                    CircularProgressIndicator(
+                    GradientProgressIndicator(
                         progress = progress,
                         modifier = commonModifier,
                         strokeWidth = trackWidth,

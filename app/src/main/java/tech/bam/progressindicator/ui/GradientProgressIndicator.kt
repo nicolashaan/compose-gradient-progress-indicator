@@ -3,11 +3,6 @@ package tech.bam.progressindicator.ui
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.progressSemantics
-import androidx.compose.material3.CircularIndicatorDiameter
-import androidx.compose.material3.drawCircularIndicator
-import androidx.compose.material3.drawDeterminateCircularIndicator
-import androidx.compose.material3.toColor
-import androidx.compose.material3.tokens.CircularProgressIndicatorTokens
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -20,11 +15,11 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 
 @Composable
-fun CircularProgressIndicator(
+fun GradientProgressIndicator(
     progress: Float,
     modifier: Modifier = Modifier,
-    color: Color = CircularProgressIndicatorTokens.ActiveIndicatorColor.toColor(),
-    strokeWidth: Dp = CircularProgressIndicatorTokens.ActiveIndicatorWidth
+    color: Color,
+    strokeWidth: Dp
 ) {
     val stroke = with(LocalDensity.current) {
         Stroke(width = strokeWidth.toPx(), cap = StrokeCap.Butt)
@@ -32,7 +27,6 @@ fun CircularProgressIndicator(
     Canvas(
         modifier
             .progressSemantics(progress)
-            .size(CircularIndicatorDiameter)
     ) {
         // Start at 12 o'clock
         val startAngle = 270f
