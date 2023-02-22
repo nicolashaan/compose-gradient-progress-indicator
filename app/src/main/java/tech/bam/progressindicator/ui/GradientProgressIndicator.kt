@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 
@@ -84,13 +85,15 @@ private fun DrawScope.drawCircularIndicator(
     // To do this we need to remove half the stroke width from the total diameter for both sides.
     val diameterOffset = stroke.width / 2
     val arcDimen = size.width - 2 * diameterOffset
-    drawArc(
-        brush = Brush.sweepGradient(listOf(gradientStart, gradientEnd)),
-        startAngle = startAngle,
-        sweepAngle = sweep,
-        useCenter = false,
-        topLeft = Offset(diameterOffset, diameterOffset),
-        size = Size(arcDimen, arcDimen),
-        style = stroke
-    )
+    rotate(degrees = -90f) {
+        drawArc(
+            brush = Brush.sweepGradient(listOf(gradientStart, gradientEnd)),
+            startAngle = startAngle,
+            sweepAngle = sweep,
+            useCenter = false,
+            topLeft = Offset(diameterOffset, diameterOffset),
+            size = Size(arcDimen, arcDimen),
+            style = stroke
+        )
+    }
 }
