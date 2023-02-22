@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
@@ -18,7 +19,8 @@ import androidx.compose.ui.unit.Dp
 fun GradientProgressIndicator(
     progress: Float,
     modifier: Modifier = Modifier,
-    color: Color,
+    gradientStart: Color,
+    gradientEnd: Color,
     trackColor: Color,
     strokeWidth: Dp
 ) {
@@ -33,7 +35,13 @@ fun GradientProgressIndicator(
         val startAngle = 270f
         val sweep = progress * 360f
         drawDeterminateCircularIndicator(startAngle, 360f, trackColor, stroke)
-        drawDeterminateCircularIndicator(startAngle, sweep, color, stroke)
+        drawCircularIndicator(
+            startAngle = startAngle,
+            sweep = sweep,
+            gradientStart = gradientStart,
+            gradientEnd = gradientEnd,
+            stroke = stroke
+        )
     }
 }
 
@@ -56,6 +64,28 @@ private fun DrawScope.drawCircularIndicator(
     val arcDimen = size.width - 2 * diameterOffset
     drawArc(
         color = color,
+        startAngle = startAngle,
+        sweepAngle = sweep,
+        useCenter = false,
+        topLeft = Offset(diameterOffset, diameterOffset),
+        size = Size(arcDimen, arcDimen),
+        style = stroke
+    )
+}
+
+private fun DrawScope.drawCircularIndicator(
+    startAngle: Float,
+    sweep: Float,
+    gradientStart: Color,
+    gradientEnd: Color,
+    stroke: Stroke
+) {
+    // To draw this circle we need a rect with edges that line up with the midpoint of the stroke.
+    // To do this we need to remove half the stroke width from the total diameter for both sides.
+    val diameterOffset = stroke.width / 2
+    val arcDimen = size.width - 2 * diameterOffset
+    drawArc(
+        brush = Brush.linearGradient(listOf(gradientStart, gradientEnd)),
         startAngle = startAngle,
         sweepAngle = sweep,
         useCenter = false,

@@ -25,13 +25,14 @@ import androidx.compose.ui.unit.dp
 import tech.bam.progressindicator.ui.theme.CustomProgressIndicatorTheme
 import tech.bam.progressindicator.ui.theme.LightGrey
 
-enum class ProgressBarColor(private val color: Color) {
-    Red(Color(255, 31, 43)),
-    Green(Color(38, 222, 129)),
-    Blue(Color(75, 123, 236)),
-    Purple(Color(98, 0, 254, 255));
+enum class ProgressBarColor(val gradientStart: Color, val gradientEnd: Color) {
+    Red(Color(254, 222, 224), Color(255, 31, 43)),
+    Green(Color(168, 242, 205), Color(38, 222, 129)),
+    Blue(Color(219, 229, 251), Color(75, 123, 236)),
+    Purple(Color(224, 204, 255), Color(98, 0, 254, 255));
+
     operator fun invoke(): Color {
-        return color
+        return gradientEnd
     }
 }
 
@@ -62,14 +63,16 @@ fun App() {
                         progress = progress,
                         modifier = commonModifier,
                         strokeWidth = trackWidth,
-                        color = ProgressBarColor.Blue(),
+                        gradientStart = ProgressBarColor.Blue.gradientStart,
+                        gradientEnd = ProgressBarColor.Blue.gradientEnd,
                         trackColor = trackColor,
                     )
                     GradientProgressIndicator(
                         progress = progress,
                         modifier = commonModifier,
                         strokeWidth = trackWidth,
-                        color = ProgressBarColor.Red(),
+                        gradientStart = ProgressBarColor.Red.gradientStart,
+                        gradientEnd = ProgressBarColor.Red.gradientEnd,
                         trackColor = trackColor,
                     )
                 }
@@ -81,14 +84,16 @@ fun App() {
                         progress = progress,
                         modifier = commonModifier,
                         strokeWidth = trackWidth,
-                        color = ProgressBarColor.Green(),
+                        gradientStart = ProgressBarColor.Green.gradientStart,
+                        gradientEnd = ProgressBarColor.Green.gradientEnd,
                         trackColor = trackColor,
                     )
                     GradientProgressIndicator(
                         progress = progress,
                         modifier = commonModifier,
                         strokeWidth = trackWidth,
-                        color = ProgressBarColor.Purple(),
+                        gradientStart = ProgressBarColor.Purple.gradientStart,
+                        gradientEnd = ProgressBarColor.Purple.gradientEnd,
                         trackColor = trackColor,
                     )
                 }
