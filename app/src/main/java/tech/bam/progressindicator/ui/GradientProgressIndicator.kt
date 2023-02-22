@@ -87,7 +87,12 @@ private fun DrawScope.drawCircularIndicator(
     val arcDimen = size.width - 2 * diameterOffset
     rotate(degrees = -90f) {
         drawArc(
-            brush = Brush.sweepGradient(listOf(gradientStart, gradientEnd)),
+            brush = Brush.sweepGradient(
+                colorStops = listOf(
+                    0.0f to gradientStart,
+                    sweep / 360 to gradientEnd,
+                ).toTypedArray()
+            ),
             startAngle = startAngle + 90,
             sweepAngle = sweep,
             useCenter = false,
