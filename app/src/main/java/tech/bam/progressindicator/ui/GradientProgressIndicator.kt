@@ -88,7 +88,7 @@ private fun DrawScope.drawCircularIndicator(
     rotate(degrees = -90f) {
         drawArc(
             brush = Brush.sweepGradient(listOf(gradientStart, gradientEnd)),
-            startAngle = startAngle,
+            startAngle = startAngle + 90,
             sweepAngle = sweep,
             useCenter = false,
             topLeft = Offset(diameterOffset, diameterOffset),
